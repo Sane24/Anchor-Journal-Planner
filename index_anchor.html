@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anchor: your daily home base</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns=%22http://www.w3.org/2000/svg%22%20viewBox=%220%200%2032%2032%22%3E%20%3Crect%20width=%2232%22%20height=%2232%22%20rx=%227%22%20fill=%22%232c4a46%22/%3E%20%3Cg%20fill=%22none%22%20stroke=%22%23F2E4CF%22%20stroke-width=%222.3%22%20stroke-linecap=%22round%22%20stroke-linejoin=%22round%22%3E%20%3Ccircle%20cx=%2216%22%20cy=%226.6%22%20r=%222.6%22/%3E%20%3Cline%20x1=%2216%22%20y1=%229.2%22%20x2=%2216%22%20y2=%2225%22/%3E%20%3Cline%20x1=%2210%22%20y1=%2212.6%22%20x2=%2222%22%20y2=%2212.6%22/%3E%20%3Cpath%20d=%22M9%2021%20C9%2025.6%2012.6%2026.6%2016%2024.4%20C19.4%2026.6%2023%2025.6%2023%2021%22/%3E%20%3Cpath%20d=%22M9%2021%20L6.4%2018%20M23%2021%20L25.6%2018%22/%3E%20%3C/g%3E%20%3C/svg%3E">
+<meta name="theme-color" content="#2c4a46">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="splash" aria-hidden="true">
+  <div class="splash-inner">
+    <div class="anchor-stage">
+      <span class="ripple"></span>
+      <svg class="anchor-svg" viewBox="0 0 120 140" fill="none">
+        <circle class="anchor-path p1" pathLength="1" cx="60" cy="22" r="9"/>
+        <line class="anchor-path p2" pathLength="1" x1="60" y1="31" x2="60" y2="116"/>
+        <line class="anchor-path p3" pathLength="1" x1="40" y1="46" x2="80" y2="46"/>
+        <path class="anchor-path p4" pathLength="1" d="M30 98 C30 118 47 122 60 112 C73 122 90 118 90 98"/>
+        <path class="anchor-path p5" pathLength="1" d="M30 98 L23 88 M90 98 L97 88"/>
+      </svg>
+    </div>
+    <div class="splash-word">Anchor</div>
+    <div class="splash-tag">One thing at a time.</div>
+  </div>
+  <div class="splash-skip">tap to skip</div>
+</div>
+<div class="wrap">
+
+  <div class="apphead">
+    <p class="eyebrow" id="dateline">today</p>
+    <div class="tabs" role="tablist">
+      <button class="tab active" data-view="today">Today</button>
+      <button class="tab" data-view="plan">Plan</button>
+      <button class="tab" data-view="reflect">Reflect</button>
+      <button class="tab" data-view="history">Look back</button>
+    </div>
+    <h1 class="greet" id="greeting">One thing at a time.</h1>
+    <p class="spark" id="spark">Your focus and your care, on one screen.</p>
+    <div class="glance" id="glance"></div>
+  </div>
+
+  <!-- ===================== TODAY ===================== -->
+  <section class="view stack" id="view-today">
+
+    <section class="card" id="gameplanCard" style="display:none">
+      <div class="gameplan" id="gameplan"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot three"></span>Today's three</h2>
+      <p class="hint">Up to three things that matter today. Everything else waits in the brain dump.</p>
+      <div id="threeRows"></div>
+      <div class="dump" id="dump">
+        <button class="dump-toggle" id="dumpToggle" aria-expanded="false">
+          <span class="chev">▸</span> Brain dump <span id="dumpCount" style="color:var(--ink-soft);font-weight:400"></span>
+        </button>
+        <div class="dump-body">
+          <div class="row-add">
+            <input id="dumpInput" placeholder="Get it out of your head…" aria-label="Add to brain dump">
+            <button class="pill-btn" id="dumpAdd">Add</button>
+          </div>
+          <ul class="dump-list" id="dumpList"></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="card timer-card">
+      <h2 style="justify-content:center"><span class="dot focus"></span>Focus sprint</h2>
+      <p class="hint" style="text-align:center">Name one next action, set a short timer, start before you feel ready.</p>
+      <div class="ring-wrap">
+        <svg viewBox="0 0 220 220" aria-hidden="true">
+          <circle class="ring-bg" cx="110" cy="110" r="96"></circle>
+          <circle class="ring-fg" id="ringFg" cx="110" cy="110" r="96"></circle>
+        </svg>
+        <div class="ring-center">
+          <div class="ring-time" id="ringTime">15:00</div>
+          <div class="ring-label" id="ringLabel">ready</div>
+        </div>
+      </div>
+      <input class="next-action" id="nextAction" placeholder="What's the one next action?" aria-label="One next action">
+      <div class="len-row" id="lenRow">
+        <button class="len" data-min="10">10 min</button>
+        <button class="len sel" data-min="15">15 min</button>
+        <button class="len" data-min="25">25 min</button>
+        <button class="len" data-min="45">45 min</button>
+      </div>
+      <div class="timer-actions">
+        <button class="btn primary" id="startBtn">Start</button>
+        <button class="btn ghost" id="reduce5" title="Too long? Take five off.">−5 min</button>
+        <button class="btn ghost" id="extend5" title="Riding a wave? Add five.">+5 min</button>
+        <button class="btn ghost" id="resetTimer">Reset</button>
+      </div>
+      <p class="sprint-msg" id="sprintMsg"></p>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot care"></span>Care anchors</h2>
+      <p class="hint">Fuel that keeps the engine running. Wipes clean every morning, no streaks to break.</p>
+      <div class="care-grid" id="careGrid"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot win"></span>Wins</h2>
+      <p class="hint">Catch what went right, however small, the antidote to "I did nothing today."</p>
+      <div class="row-add">
+        <input id="winInput" placeholder="What went right?" aria-label="Add a win">
+        <button class="pill-btn win" id="winAdd">Log it</button>
+      </div>
+      <ul class="win-list" id="winList"></ul>
+    </section>
+
+    <button class="btn full" id="toReflect" style="background:var(--reflect);color:#fff">Wind down → reflect on today</button>
+
+    <section class="card reset-card">
+      <p><strong>Rough day?</strong> Allowed. Clear today's tasks &amp; care and start clean, your dump, wins, and journal stay.</p>
+      <button class="reset-btn" id="gentleReset">Gentle reset</button>
+    </section>
+  </section>
+
+  <!-- ===================== PLAN ===================== -->
+  <section class="view stack hidden" id="view-plan">
+    <div class="seg" id="planSeg">
+      <button class="active" data-day="0">Today</button>
+      <button data-day="1">Tomorrow</button>
+      <button data-day="week">This week</button>
+    </div>
+    <section class="card" id="planEditorCard">
+      <h2><span class="dot plan"></span><span id="planTitle">Today</span></h2>
+      <p class="hint" id="planHint">Set up to three priorities, add if-then rules, and name the first piece of work.</p>
+      <div id="planEditor"></div>
+    </section>
+    <section class="card hidden" id="weekCard">
+      <h2><span class="dot plan"></span>The week ahead</h2>
+      <p class="hint">One main focus per day is plenty. Future-you will thank present-you for the head start.</p>
+      <div id="weekList"></div>
+    </section>
+  </section>
+
+  <!-- ===================== REFLECT ===================== -->
+  <section class="view stack hidden" id="view-reflect">
+    <div class="card">
+      <h2 style="justify-content:center"><span class="dot reflect"></span>End of day</h2>
+      <p class="hint" style="text-align:center">Close the loop on today. Two minutes of honesty beats a perfect plan.</p>
+    </div>
+
+    <section class="card">
+      <h2><span class="dot reflect"></span>Today's numbers</h2>
+      <p class="hint">Exact figures where they help, log as much or as little as you want. No goals or targets here, just a record.</p>
+      <div id="metrics"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot reflect"></span>How you felt</h2>
+      <p class="hint">Quick gut-check, 1 (low) to 5 (great). These feed your trends.</p>
+      <div id="scales"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot reflect"></span>Productivity review</h2>
+      <label class="field">Did I do what I planned?</label>
+      <ul class="planned-list" id="plannedList"></ul>
+      <div class="chips" id="completedChips">
+        <button class="chip" data-v="yes">Yes</button>
+        <button class="chip" data-v="mostly">Mostly</button>
+        <button class="chip" data-v="no">Not really</button>
+      </div>
+      <label class="field">What distracted me most?<span class="sub">name the thing, not the shame</span></label>
+      <textarea id="prodDistraction" placeholder="phone, a new idea, a meeting that derailed me…"></textarea>
+      <label class="field">What got me started / kept me focused?</label>
+      <textarea id="prodMotivator" placeholder="the thing that worked today…"></textarea>
+      <label class="field">Deep work vs. drifting</label>
+      <div class="slider-wrap">
+        <input type="range" id="deepSlider" min="0" max="100" value="50">
+        <div class="slider-ends"><span>mostly drifting</span><span>mostly deep</span></div>
+        <div class="slider-val" id="deepVal">about half and half</div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot reflect"></span>Wins &amp; struggles</h2>
+      <p class="hint">Your personal ADHD field notes: what to repeat, what to dodge.</p>
+      <label class="field">What helped me focus <span class="sub">a hack worth repeating</span></label>
+      <textarea id="rHelped" placeholder="noise-cancelling, body-doubling, the +5 button…"></textarea>
+      <label class="field">What made it worse <span class="sub">a trigger to watch for</span></label>
+      <textarea id="rWorse" placeholder="skipped lunch, started in bed, doom-scrolling…"></textarea>
+      <label class="field">One thing to do differently tomorrow</label>
+      <textarea id="rDiff" placeholder="the one change that would help…"></textarea>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot plan"></span>Set up tomorrow</h2>
+      <p class="hint">This becomes your home screen in the morning. Lock in the plan while today's still fresh.</p>
+      <div id="reflectPlan"></div>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot reflect"></span>Random thoughts &amp; feelings</h2>
+      <p class="hint">Anything swirling around. No structure required.</p>
+      <textarea id="rThoughts" placeholder="brain, meet paper…" style="min-height:90px"></textarea>
+    </section>
+
+    <section class="card">
+      <h2><span class="dot reflect"></span>Pics &amp; art of the day</h2>
+      <p class="hint">Add as many as you like, photos from your day, and anything you made or that caught your eye.</p>
+      <div class="gal-label">Pics</div>
+      <div class="gallery" id="galPics"></div>
+      <div class="gal-label">Art</div>
+      <div class="gallery" id="galArt"></div>
+    </section>
+
+    <button class="btn full" id="saveReflection" style="background:var(--reflect);color:#fff;font-size:16px;padding:14px">Save &amp; close out today</button>
+    <div style="height:8px"></div>
+  </section>
+
+  <!-- ===================== HISTORY ===================== -->
+  <section class="view stack hidden" id="view-history">
+    <section class="card">
+      <h2><span class="dot reflect"></span>Your trends</h2>
+      <p class="hint">Last entries, so you can see your patterns instead of guessing at them.</p>
+      <div class="spark-grid" id="sparkGrid"></div>
+    </section>
+    <section class="card">
+      <h2><span class="dot three"></span>Past days</h2>
+      <p class="hint">Every day you've closed out. Tap one to reread it.</p>
+      <div id="histList"></div>
+    </section>
+    <section class="card">
+      <h2><span class="dot three"></span>Your data</h2>
+      <p class="hint">Everything lives in this browser, on this device, nobody else can see it. Download a backup to keep it safe or carry it to another device.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn ghost" id="exportBtn">Download backup</button>
+        <label class="btn ghost" style="cursor:pointer;display:inline-flex;align-items:center">Import backup<input type="file" id="importInput" accept="application/json" style="display:none"></label>
+      </div>
+      <p class="hint" id="storageMode" style="margin:12px 0 0"></p>
+    </section>
+  </section>
+
+  <p class="credit">Anchor: built to be opened, not obeyed.</p>
+</div>
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
